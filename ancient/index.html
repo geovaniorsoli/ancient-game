@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ancient </title>
+    <link rel="stylesheet" href="./css/style.css"
+</head>
+<body>
+    <div class="game-board">
+      
+       
+         <img src="./img/mulher.gif" class="mario">
+         <img src="./img/lixeira.png" class="pipe">
+         <img src="./img/nuvem 1.png" class="nuvem1">
+         <img src="./img/nuvem.png" class="nuvem">
+         <img src="./img/lua.png" class="lua"
+        
+    </div> 
+
+    <audio src="./song mp3.mp3" autoplay controls loop> </audio>
+    
+    <script src="./js/script.js" defer> </script>
+
+    <script>
+        const mario = document.querySelectorAll('.mario')[0];
+        const pipe = document.querySelectorAll('.pipe')[0];
+        const jump = () => {
+            mario.classList.add("jump");
+            setTimeout(()=>{
+                mario.classList.remove('jump');
+            },500);
+        }
+
+        document.addEventListener('keydown', jump);
+
+        const loop = setInterval(() =>{
+
+            const pipePosition = pipe.offsetLeft;
+            const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+
+            if (pipePosition <= 140 &&pipePosition > 40 && marioPosition <78) {
+
+                pipe.style.animation  =  'none';
+                pipe.style.left= `${pipePosition}px`;
+
+                mario.style.animation  =  'none';
+                mario.style.bottom= `${marioPosition}px`;
+
+                mario.src='./img/morreu.gif'; 
+                clearInterval(loop);
+            }
+        }, 10)
+
+
+    </script>
+
+   
+</body>
+</html>
